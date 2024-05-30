@@ -1,6 +1,5 @@
 .env
 dist
-dist-ssr
 *.local
 package-lock.json
 node_modules
