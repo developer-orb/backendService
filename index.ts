@@ -18,10 +18,8 @@ const PORT = process.env.PORT || 3001;
 
 async function startServer() {
   try {
-    // Sincronizar la base de datos
     await conn.sync({ force: true });
     
-    // Iniciar el servidor
     server.listen(PORT, () => {
       console.log("Server listening on port", PORT);
     });
