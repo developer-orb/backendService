@@ -45,28 +45,29 @@ Object.entries(sequelize.models).forEach(([name, model]) => {
   delete sequelize.models[name];
 });
 
-const { Users, Service, Appointment, Rating, Statistic } = sequelize.models as any;
+const { User, Service, Appointment, Rating, Statistic } = sequelize.models as any;
 
 // Relaciones Usuarios-Servicios
-Service.belongsTo(Users, { as: 'professional', foreignKey: 'professional_id' });
-Users.hasMany(Service, { as: 'services', foreignKey: 'professional_id' });
+Service.belongsTo(User, { as: 'professional', foreignKey: 'professional_id' });
+User.hasMany(Service, { as: 'services', foreignKey: 'professional_id' });
 
 // Relaciones de Usuarios-Servicios-Citas
-Appointment.belongsTo(Users, { as: 'client', foreignKey: 'client_id' });
+Appointment.belongsTo(User, { as: 'client', foreignKey: 'client_id' });
 Appointment.belongsTo(Service, { as: 'service', foreignKey: 'service_id' });
-Users.hasMany(Appointment, { as: 'appointments', foreignKey: 'client_id' });
+User.hasMany(Appointment, { as: 'appointments', foreignKey: 'client_id' });
 Service.hasMany(Appointment, { as: 'appointments', foreignKey: 'service_id' });
 
 // Relaciones Usuarios/Servicios/Citas/Rating
-Rating.belongsTo(Users, { as: 'professional', foreignKey: 'professional_id' });
-Rating.belongsTo(Users, { as: 'client', foreignKey: 'client_id' });
+Rating.belongsTo(User, { as: 'professional', foreignKey: 'professional_id' });
+Rating.belongsTo(User, { as: 'client', foreignKey: 'client_id' });
 Rating.belongsTo(Service, { as: 'service', foreignKey: 'service_id' });
 Rating.belongsTo(Appointment, { as: 'appointment', foreignKey: 'appointment_id' });
-Users.hasMany(Rating, { as: 'ratings', foreignKey: 'professional_id' });
-Users.hasMany(Rating, { as: 'clientRatings', foreignKey: 'client_id' });
+User.hasMany(Rating, { as: 'ratings', foreignKey: 'professional_id' });
+User.hasMany(Rating, { as: 'clientRatings', foreignKey: 'client_id' });
 
 // Relaciones Usuarios-Estadisticas
-Statistic.belongsTo(Users, { as: 'professional', foreignKey: 'professional_id' });
-Users.hasMany(Statistic, { as: 'statistics', foreignKey: 'professional_id' });
+Statistic.belongsTo(User, { as: 'professional', foreignKey: 'professional_id' });
+User.hasMany(Statistic, { as: 'statistics', foreignKey: 'professional_id' });
 
-export { sequelize as conn, Op, Users, Service, Appointment, Rating, Statistic };
+
+export { sequelize as conn, Op, User, Service, Appointment, Rating, Statistic };
