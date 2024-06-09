@@ -5,7 +5,6 @@ import cookieParser from 'cookie-parser';
 import cors from 'cors';
 import morgan from 'morgan';
 import path from 'path';
-import routes from './routes/index';
 import router from './routes/index';
 
 dotenv.config();
