@@ -4,6 +4,10 @@ interface UserAttributes {
   id: number;
   username: string;
   email: string;
+  name: string;
+  password: string;
+  role: string;
+  profession: string;
 }
 
 interface UserCreationAttributes extends Optional<UserAttributes, 'id'> {}
@@ -13,6 +17,10 @@ export default (sequelize: Sequelize) => {
     public id!: number;
     public username!: string;
     public email!: string;
+    public name!: string;
+    public password!: string;
+    public role!: string;
+    public profession!: string;
   }
 
   User.init({
@@ -32,6 +40,22 @@ export default (sequelize: Sequelize) => {
       validate: {
         isEmail: true
       }
+    },
+    name: {
+      type: DataTypes.STRING,
+      allowNull: false
+    },
+    password: {
+      type: DataTypes.STRING,
+      allowNull: false
+    },
+    role: {
+      type: DataTypes.STRING,
+      allowNull: false
+    },
+    profession: {
+      type: DataTypes.STRING,
+      allowNull: false
     }
   }, {
     sequelize,
