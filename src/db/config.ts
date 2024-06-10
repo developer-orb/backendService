@@ -47,17 +47,17 @@ Object.entries(sequelize.models).forEach(([name, model]) => {
 
 const { User, Service, Appointment, Rating, Statistic } = sequelize.models as any;
 
-// Relaciones Usuarios-Servicios
+// User-Service Relationships
 Service.belongsTo(User, { as: 'professional', foreignKey: 'professional_id' });
 User.hasMany(Service, { as: 'services', foreignKey: 'professional_id' });
 
-// Relaciones de Usuarios-Servicios-Citas
+// User-Service-Appointment Relations
 Appointment.belongsTo(User, { as: 'client', foreignKey: 'client_id' });
 Appointment.belongsTo(Service, { as: 'service', foreignKey: 'service_id' });
 User.hasMany(Appointment, { as: 'appointments', foreignKey: 'client_id' });
 Service.hasMany(Appointment, { as: 'appointments', foreignKey: 'service_id' });
 
-// Relaciones Usuarios/Servicios/Citas/Rating
+// Relationships Users/Services/Quotations/Rating
 Rating.belongsTo(User, { as: 'professional', foreignKey: 'professional_id' });
 Rating.belongsTo(User, { as: 'client', foreignKey: 'client_id' });
 Rating.belongsTo(Service, { as: 'service', foreignKey: 'service_id' });
@@ -65,7 +65,7 @@ Rating.belongsTo(Appointment, { as: 'appointment', foreignKey: 'appointment_id' 
 User.hasMany(Rating, { as: 'ratings', foreignKey: 'professional_id' });
 User.hasMany(Rating, { as: 'clientRatings', foreignKey: 'client_id' });
 
-// Relaciones Usuarios-Estadisticas
+// User-Statistics Relationships
 Statistic.belongsTo(User, { as: 'professional', foreignKey: 'professional_id' });
 User.hasMany(Statistic, { as: 'statistics', foreignKey: 'professional_id' });
 
